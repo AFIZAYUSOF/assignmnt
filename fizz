@@ -13,6 +13,11 @@ int main(void)
     int retval;     /* child process: user-provided return code */
     int status;     /* parent process: child's exit status */
     char s[200];
+    
+    if (signal(SIGINT, sigint_handler) == SIG_ERR){
+    perror("signal");
+    exit(1);
+    }
 
     /* only 1 int variable is needed because each process would have its
        own instance of the variable
@@ -60,7 +65,7 @@ int main(void)
     void sigint_handler(int sig)
     {
         printf("Ctrl + C detected! \n");
-}
+    }
 
 
 
